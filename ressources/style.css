@@ -1,0 +1,41 @@
+/* GENERAL */
+
+body, div, h1, h2, h3, h4, h5, h6, p, ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+p {
+    font-family: Candara, sans-serif;
+}
+
+li {
+    list-style: none;
+}
+
+/* CUSTOM */
+
+.max-width-900px{
+    max-width: 900px;
+}
+.m-auto{
+    margin: auto;
+}
+.mx-auto{
+    margin-left: auto;
+    margin-right: auto;
+}
+.my-auto{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.border-black{
+    border: 1px solid black;
+}
+
+/* VERY CUSTOM */

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,10 +23,18 @@
     <script src="ressources/script.js"></script>
 </head>
 <body>
-<header></header>
+<header>
+    <div class="max-width-900px mx-auto">
+        <p id="header_bonjour"></p>
+    </div>
+</header>
 <main id="main-to_do_list">
-NOICE
+    <article id="contenu-to_do_list" class="max-width-900px mx-auto border-black">
+        CONTENU
+    </article>
 </main>
-<footer></footer>
+<footer>
+    <div class="max-width-900px mx-auto">footer</div>
+</footer>
 </body>
 </html>
