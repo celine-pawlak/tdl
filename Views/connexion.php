@@ -4,4 +4,5 @@
 <input type="password" id="password" name="password" required>
 <label for="conf_password">Confirmer password :</label>
 <input type="password" id="conf_password" name="conf_password" required>
+<p id="erreur_con"></p>
 <button id="valid_insc">Connexion</button>
