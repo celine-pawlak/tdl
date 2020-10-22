@@ -48,4 +48,10 @@
                     echo json_encode($errors);
                 }
         }
+    else
+        {
+            $errors = [];
+            array_push($errors, 'Veuillez remplir tous les champs');
+            echo json_encode($errors);
+        }
 ?>

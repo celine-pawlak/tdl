@@ -1,5 +1,5 @@
 $(function()
-    {
+    {                  
         $('#con_insc').click(function()
             {
                 $.ajax(

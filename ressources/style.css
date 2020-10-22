@@ -13,8 +13,13 @@
         padding-left: 2vw;
         padding-right: 2vw;
         margin-top: 2vh;
+        margin-bottom: 2vh;
         background-color: #70F386;
         border: 0;
+    }
+#main_index span
+    {
+        color: red;
     }
 h1
     {

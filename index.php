@@ -9,6 +9,9 @@
     <title>To Do List</title>
 </head>
 <body>
+    <header>
+        
+    </header>
     <main id="main_index">
         <h1>Bienvenu sur To Do List</h1>
         <button id="inscription">Inscription</button>

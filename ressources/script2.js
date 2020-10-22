@@ -1,5 +1,5 @@
 $(function()
-    {        
+    {              
         $('#inscription').click(function()
             {
                 $.ajax(
@@ -25,6 +25,5 @@ $(function()
                                 $('#main_index').html(data);                               
                             }
                     });
-            });
-        
+            });        
     });

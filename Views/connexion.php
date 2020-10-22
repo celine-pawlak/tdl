@@ -5,7 +5,7 @@
     <input type="password" id="password" name="password" placeholder="Mot de passe">
     <p id="erreur_con"></p>
     <button id="valid_insc">Connexion</button>
-    <small>Pas encore de compte ? -> <span id="insc_con">Inscrivez-vous</span></small>
+    <small>Pas encore de compte ? => <span id="insc_con">Inscrivez-vous</span></small>
 </section>
 
 <script >var url = "ressources/connexion.js";

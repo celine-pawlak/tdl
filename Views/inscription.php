@@ -12,8 +12,9 @@
     <input type="text" id="username" name="username" placeholder="Username">
     <p id="erreur_insc"></p>
     <button id="valid_insc">Inscription</button> 
-    <small>Vous avez déjà un compte ? -> <span id="con_insc">Connectez-vous</span></small> 
+    <small>Vous avez déjà un compte ? => <span id="con_insc">Connectez-vous</span></small> 
 </section>
 
 <script >var url = "ressources/inscription.js";
 $.getScript(url)</script>       
+
