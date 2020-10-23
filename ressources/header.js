@@ -16,4 +16,32 @@ $(function()
                             }
                     });
             });     
+        $('#header_acc').click(function()
+            {
+                window.location.href = 'index.php';
+            });
+        $('#header_insc').click(function()
+            {
+                $.ajax(
+                    {
+                        url : 'Views/inscription.php',
+                        type : 'POST',
+                        success : (data)=>
+                            {
+                                $('#main_index').html(data);                                    
+                            }
+                    });
+            });
+        $('#header_con').click(function()
+            {
+                $.ajax(
+                    {
+                        url : 'Views/connexion.php',
+                        type : 'POST',
+                        success : (data)=>
+                            {
+                                $('#main_index').html(data);                                    
+                            }
+                    });
+            });
     });

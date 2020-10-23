@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,12 @@
 </head>
 <body>
     <header>
-        <?php include 'Views/header.php'?>          
+        <?php include 'Views/header.php';
+            // if(isset($_SESSION['user']))
+            //     {
+            //         header('Location:todolist.php ');
+            //     } 
+        ?>         
     </header>
     <main id="main_index">
         <h1>Bienvenu sur To Do List</h1>
