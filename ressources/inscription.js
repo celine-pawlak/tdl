@@ -1,5 +1,31 @@
 $(function()
-    {                  
+    {                   
+        $('#conf_email').keyup(function()
+            {
+                console.log(this.value);
+                if(this.value !== document.getElementById("email").value)
+                    {
+                        document.getElementById("conf_email").className = "nop";                        
+                    }
+                else  
+                    {console.log('toto');
+                        document.getElementById("conf_email").className = "yep";                        
+                    }       
+            });
+        $('#email').keyup(function()
+            {
+                var regex_mail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/g;
+                var valeur = $('#email').val();
+                
+                if(valeur.match(regex_mail))
+                    {
+                        $('#email').removeClass("nop").addClass("yep");
+                    }
+                else
+                    {
+                        $('#email').removeClass('yep').addClass("nop");
+                    }
+            });
         $('#con_insc').click(function()
             {
                 $.ajax(
@@ -16,6 +42,10 @@ $(function()
             {                       
                 $('#erreur_insc').html('');
                 // Vérifier que le mail de confirmation correspondent au mail  
+                $('#conf_email').change(function()
+                    {
+                        console.log(this.val());
+                    });
                 // Vérifier que le password correspondent à un regex
                 // Vérifier que les champs ne soient pas vide
                 // Envoie les informations pour traitement                                    

@@ -30,7 +30,7 @@
     }
 #main_index span
     {
-        color: red;
+        color: blue;
     }
 h1
     {
@@ -38,11 +38,13 @@ h1
     }
 .nop
     {
-        outline: red;
+        border-color: red !important;
+        outline-color: red !important;
     }
 .yep
     {
-        outline: green;
+        border-color: rgb(3, 207, 3) !important;
+        outline-color: rgb(3, 207, 3) !important;
     }
 .form
     {
