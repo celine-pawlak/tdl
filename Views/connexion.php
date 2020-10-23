@@ -1,4 +1,3 @@
-<p id="info_inscription"></p>
 <h2>Connectez-vous</h2>
 <section class="form">    
     <input type="email" id="email_con" name="email_con" placeholder="Email">    

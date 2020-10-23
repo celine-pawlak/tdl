@@ -36,16 +36,22 @@ $(function()
                                     {                                        
                                         if(data==='connexion')
                                             {
-                                                $.ajax(
+                                                $('#info_inscription').removeClass('info_none').addClass('info_flex');
+                                                $('#info_inscription').html('Inscription prise en compte, veuillez patienter..');
+                                                setTimeout(function()
                                                     {
-                                                        url : 'Views/connexion.php',
-                                                        type : 'POST',
-                                                        success : (data)=>
+                                                        $.ajax(
                                                             {
-                                                                $('#main_index').html(data);    
-                                                                $('#info_inscription').html('Inscription prise en compte')
-                                                            }
-                                                    });
+                                                                url : 'Views/connexion.php',
+                                                                type : 'POST',
+                                                                success : (data)=>
+                                                                    {
+                                                                        $('#main_index').html(data);    
+                                                                       
+                                                                        
+                                                                    }
+                                                            });
+                                                    }, 2500);
                                             }
                                         else
                                             {

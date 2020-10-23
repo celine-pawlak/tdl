@@ -1,4 +1,5 @@
 <h2>Créer un compte</h2>
+<p id="info_inscription" class="info_none"></p>
 <section class="form">    
     <input type="email" id="email" name="email" placeholder="Email">    
     <input type="email" id="conf_email" name="conf_email" placeholder="Confirmer l'email">    
@@ -8,6 +9,7 @@
     <p id="erreur_insc"></p>
     <button id="valid_insc">Inscription</button> 
     <small>Vous avez déjà un compte ? => <span id="con_insc">Connectez-vous</span></small> 
+    
 </section>
 
 <script >var url = "ressources/inscription.js";

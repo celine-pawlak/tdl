@@ -4,6 +4,10 @@
         display: flex;
         justify-content: space-around;
     }
+.bouton-header
+    {
+        cursor: pointer;
+    }
 /* FIN HEADER */
 /* INSCRIPTION */
 #main_index
@@ -58,5 +62,22 @@ h1
         border-right: 0;
         border-left: 0;
         border-color: #A9AAAA;
+    }
+#info_inscription
+    {
+        width: 100%;
+        height: fit-content;
+        padding-top: 2vh;
+        padding-bottom: 2vh;
+        background-color: greenyellow;                
+    }
+.info_none
+    {
+        display: none;
+    }
+.info_flex
+    {
+        display: flex;
+        justify-content: center;
     }
 /* FIN INSCRIPTION */
