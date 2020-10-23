@@ -2,15 +2,7 @@ $(function()
     {
         $('#insc_con').click(function()
             {
-                $.ajax(
-                    {
-                        url : 'Views/inscription.php',
-                        type : 'POST',
-                        success : (data)=>
-                            {
-                                $('#main_index').html(data);                                   
-                            }
-                    });
+                htmlRewrite('Views/inscription', '#main_index');
             });
         $('#valid_con').click(function()
             {

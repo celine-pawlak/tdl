@@ -13,8 +13,9 @@ $(function()
                 else
                     {
                         $('#email').removeClass('yep').addClass("nop");
-                    }                                   
-            });
+                    }      
+                
+            });            
         // Vérifie que le mail de confirmation == mail 
         $('#conf_email').keyup(function()
             {
@@ -32,19 +33,16 @@ $(function()
         // Affiche le formulaire de connexion
         $('#con_insc').click(function()
             {
-                $.ajax(
-                    {
-                        url : 'Views/connexion.php',
-                        type : 'POST',
-                        success : (data)=>
-                            {
-                                $('#main_index').html(data);                                    
-                            }
-                    });
+                htmlRewrite('Views/connexion', '#main_index');
             });
         $('#valid_insc').click(function()
             {                                       
-                $('#erreur_insc').html('');                                           
+                $('#erreur_insc').html(''); 
+                // Mettre tous les inputs et si ok faire traitement
+                if($('#email').hasClass('yep'))                             
+                    {
+                        console.log('Zé parti');
+                    }                                          
                 // Envoie les informations pour traitement                                    
                 if(($('#email').val() != "" || $('#email').val() != null) && ($('#password').val() != "" || $('#password').val() != null) && ($('#username').val() != "" || $('#username').val() != null) && ($('#conf_email').val() != "" || $('#conf_email').val() != null) && ($('#conf_password').val() != '' || $('#conf_password') != null))
                     {
@@ -64,21 +62,8 @@ $(function()
                                         if(data==='connexion')
                                             {
                                                 $('#info_inscription').removeClass('info_none').addClass('info_flex');
-                                                $('#info_inscription').html('Inscription prise en compte, veuillez patienter..');
-                                                setTimeout(function()
-                                                    {
-                                                        $.ajax(
-                                                            {
-                                                                url : 'Views/connexion.php',
-                                                                type : 'POST',
-                                                                success : (data)=>
-                                                                    {
-                                                                        $('#main_index').html(data);    
-                                                                       
-                                                                        
-                                                                    }
-                                                            });
-                                                    }, 2500);
+                                                $('#info_inscription').html('Inscription prise en compte, veuillez patienter..');                                                
+                                                timerRedirect('Views/connexion', '#main_index');
                                             }
                                         else
                                             {
