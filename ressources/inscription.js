@@ -1,17 +1,6 @@
 $(function()
-    {                   
-        $('#conf_email').keyup(function()
-            {
-                console.log(this.value);
-                if(this.value !== document.getElementById("email").value)
-                    {
-                        document.getElementById("conf_email").className = "nop";                        
-                    }
-                else  
-                    {console.log('toto');
-                        document.getElementById("conf_email").className = "yep";                        
-                    }       
-            });
+    {       
+        // Vérifie que le mail soit au format mail
         $('#email').keyup(function()
             {
                 var regex_mail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/g;
@@ -24,8 +13,23 @@ $(function()
                 else
                     {
                         $('#email').removeClass('yep').addClass("nop");
-                    }
+                    }                                   
             });
+        // Vérifie que le mail de confirmation == mail 
+        $('#conf_email').keyup(function()
+            {
+                console.log(this.value);
+                if(this.value !== document.getElementById("email").value)
+                    {
+                        document.getElementById("conf_email").className = "nop";                        
+                    }
+                else  
+                    {console.log('toto');
+                        document.getElementById("conf_email").className = "yep";                        
+                    }       
+            });
+        // Vérifie que le mot de passe soit fort
+        // Affiche le formulaire de connexion
         $('#con_insc').click(function()
             {
                 $.ajax(
@@ -39,15 +43,8 @@ $(function()
                     });
             });
         $('#valid_insc').click(function()
-            {                       
-                $('#erreur_insc').html('');
-                // Vérifier que le mail de confirmation correspondent au mail  
-                $('#conf_email').change(function()
-                    {
-                        console.log(this.val());
-                    });
-                // Vérifier que le password correspondent à un regex
-                // Vérifier que les champs ne soient pas vide
+            {                                       
+                $('#erreur_insc').html('');                                           
                 // Envoie les informations pour traitement                                    
                 if(($('#email').val() != "" || $('#email').val() != null) && ($('#password').val() != "" || $('#password').val() != null) && ($('#username').val() != "" || $('#username').val() != null) && ($('#conf_email').val() != "" || $('#conf_email').val() != null) && ($('#conf_password').val() != '' || $('#conf_password') != null))
                     {
