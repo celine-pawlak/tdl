@@ -34,7 +34,12 @@ $(function()
                                             }
                                         else
                                             {
-                                                console.log(data);
+                                                var error = JSON.parse(data);
+                                                console.log(error);
+                                                for(let i = 0; i < error.length; i++)
+                                                    {                                                        
+                                                        $('#erreur_con').append(error[i]+'<br/>');
+                                                    }
                                             }
                                     }
                             });

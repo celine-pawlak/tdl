@@ -3,17 +3,17 @@
     require '../Database/Database.php';
     $db = new Database('tdl');
     $pdo = $db->getPDO();     
-    
+    // Partie inscription
     if($_POST['page'] == 'inscription')
         {
-            if(isset($_POST['email'], $_POST['conf_email'], $_POST['username'], $_POST['password'], $_POST['conf_password'], $_POST['inscription']) && !empty($_POST['email']) && !empty($_POST['conf_email']) && !empty($_POST['password']) && !empty($_POST['username']) && !empty($_POST['conf_password']))            
+            if(isset($_POST['email'], $_POST['conf_email'], $_POST['username'], $_POST['password'], $_POST['conf_password'])  && !empty($_POST['email']) && !empty($_POST['conf_email']) && !empty($_POST['password']) && !empty($_POST['username']) && !empty($_POST['conf_password']))            
                 {
                     // Déclaration des variables
                     $email = $_POST['email'];
                     $conf_mail = $_POST['conf_email'];
                     $password = $_POST['password'];
                     $conf_password = $_POST['conf_password'];
-                    $username = $_POST['username'];
+                    $username = htmlspecialchars($_POST['username']);
                     $errors = [];
         
                     $req = $pdo->prepare("SELECT * FROM user WHERE mail=?");    
