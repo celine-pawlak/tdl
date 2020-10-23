@@ -3,17 +3,7 @@ $(function()
         // Vérifie que le mail soit au format mail
         $('#email').keyup(function()
             {
-                var regex_mail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/g;
-                var valeur = $('#email').val();
-                
-                if(valeur.match(regex_mail))
-                    {
-                        $('#email').removeClass("nop").addClass("yep");
-                    }
-                else
-                    {
-                        $('#email').removeClass('yep').addClass("nop");
-                    }      
+                regexMailValide(this, 'nop', 'yep');
                 
             });            
         // Vérifie que le mail de confirmation == mail 
@@ -30,6 +20,10 @@ $(function()
                     }       
             });
         // Vérifie que le mot de passe soit fort
+        $('#password').keyup(function()
+            {
+                regexPasswordValide(this, 'nop', 'yep')
+            });
         // Affiche le formulaire de connexion
         $('#con_insc').click(function()
             {
