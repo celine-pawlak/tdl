@@ -1,3 +1,10 @@
+/* HEADER */
+#nav-header
+    {
+        display: flex;
+        justify-content: space-around;
+    }
+/* FIN HEADER */
 /* INSCRIPTION */
 #main_index
     {

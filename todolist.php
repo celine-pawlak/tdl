@@ -22,7 +22,9 @@
     <script src="ressources/script.js"></script>
 </head>
 <body>
-<header></header>
+<header>
+    <?php include 'Views/header.php';?>    
+</header>
 <main id="main-to_do_list">
 NOICE
 </main>

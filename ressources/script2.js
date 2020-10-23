@@ -14,7 +14,7 @@ $(function()
                     });
             });
 
-            $('#connexion').click(function()
+        $('#connexion').click(function()
             {
                 $.ajax(
                     {
@@ -25,5 +25,5 @@ $(function()
                                 $('#main_index').html(data);                               
                             }
                     });
-            });        
+            });          
     });

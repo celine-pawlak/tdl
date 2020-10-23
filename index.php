@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        
+        <?php include 'Views/header.php'?>          
     </header>
     <main id="main_index">
         <h1>Bienvenu sur To Do List</h1>

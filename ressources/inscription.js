@@ -31,7 +31,7 @@ $(function()
                             {
                                 url : 'API/indexAPI.php',
                                 type : 'POST',
-                                data: {email : email, conf_email: conf_email, password : password, username : username, conf_password : conf_password, inscription : true},
+                                data: {email : email, conf_email: conf_email, password : password, username : username, conf_password : conf_password, page : 'inscription'},
                                 success : (data)=>
                                     {                                        
                                         if(data==='connexion')
