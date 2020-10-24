@@ -1,4 +1,10 @@
-function timerRedirect(p, b)
+/**
+ * Set un timer avec de ré écrie la page
+ * @param balise $('nom') de la balise à ré écrire
+ * @param p nom de la page où alelr chercher l'html
+ * @param {number} timer Temps en millisecondes
+ */
+function timerRedirect(p, balise, timer)
     {
         setTimeout(function()
             {
@@ -8,13 +14,17 @@ function timerRedirect(p, b)
                         type : 'POST',
                         success : (data)=>
                             {
-                                $(b).html(data);                                                                                                                                                   
+                                $(balise).html(data);                                                                                                                                                   
                             }
                     });
-            }, 2500);
+            }, timer);
     }
-
-function htmlRewrite(p, b)
+/**
+ * Ré écrit la balise en allant chercher les infos dans la page p 
+ * @param balise $('nom') de la balise à ré écrire
+ * @param p nom de la page où alelr chercher l'html
+ */
+function htmlRewrite(p, balise)
     {
         $.ajax(
             {
@@ -22,10 +32,18 @@ function htmlRewrite(p, b)
                 type : 'POST',
                 success : (data)=>
                     {
-                        $(b).html(data);                                    
+                        $(balise).html(data);                                    
                     }
             });
     }
+/**
+ * Vérifie si le mail est au bon format 
+ * - change la couleur de la bordure et outline
+ * - a sera remplacé par b si match avec le regex
+ * @param balise $('nom') de la balise à comparer
+ * @param a nom d'une classe
+ * @param b nom d'une autre classe
+ */
 function regexMailValide(balise, a, b)
     {
         var regex_mail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/g;

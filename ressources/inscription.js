@@ -59,7 +59,7 @@ $(function()
                                                     {
                                                         $('#info_inscription').removeClass('info_none').addClass('info_flex');
                                                         $('#info_inscription').html('Inscription prise en compte, veuillez patienter..');                                                
-                                                        timerRedirect('Views/connexion', '#main_index');
+                                                        timerRedirect('Views/connexion', '#main_index', 2500);
                                                     }
                                                 else
                                                     {
