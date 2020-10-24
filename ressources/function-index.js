@@ -44,9 +44,9 @@ function regexMailValide(balise, a, b)
  * Vérifie si le password est au bon format 
  * - change la couleur de la bordure et outline
  * - a sera remplacé par b si match avec le regex
- * @param {number} balise $('nom') de la balise à comparer
- * @param {number} a nom d'une classe
- * @param {number} b nom d'une autre classe
+ * @param balise $('nom') de la balise à comparer
+ * @param a nom d'une classe
+ * @param b nom d'une autre classe
  */
 function regexPasswordValide(balise, a, b)
     {
@@ -65,11 +65,14 @@ function regexPasswordValide(balise, a, b)
     }
    /**
  * Compare deux valeurs
+ * Si les valeurs sont différentes, a remplace b (et inversement)
  * 
- * @param {number} balise $('nom') de la balise à comparer
- * @param {number} verif $('nom') de la balise avec laquelle on veut comparer la valeur
+ * @param balise $('nom') de la balise à comparer
+ * @param verif $('nom') de la balise avec laquelle on veut comparer la valeur
+ * @param a nom d'une classe
+ * @param b nom d'une autre classe
  */
-function isTheSame(balise, verif)
+function isTheSame(balise, verif, a, b)
     {
         var valeur = $(balise).val();
         var valeur_verif = $(verif).val();

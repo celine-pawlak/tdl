@@ -92,4 +92,13 @@ h1
         display: flex;
         justify-content: center;
     }
+#main_index aside
+    {
+        width: 40vw;
+        height: fit-content;        
+        align-items: center;
+        margin-top: 2vh;
+        margin-bottom: 10vh;
+        background-color: #F7F486;
+    }
 /* FIN INSCRIPTION */

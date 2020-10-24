@@ -99,4 +99,26 @@
             session_destroy();
             echo 'deconnecter';
         }
+    // Requête pour voir si l'username ou le mail sont dans la bdd
+    if($_POST['page'] ==  'logged')
+        {
+            if(isset($_POST['username']))
+                {
+                    $username = $_POST['username'];
+                    $req = $pdo->prepare("SELECT username FROM user WHERE username=?");    
+                    $req->execute([$username]);
+                    $isRegister = $req->fetch();
+                    $errors_con = [];
+
+                    if(empty($isRegister))
+                        {
+                            echo 'dispo';
+                        }
+                    else    
+                        {
+                            array_push($errors_con, 'Ce login est déjà prit');
+                            echo json_encode($errors_con);
+                        }
+                }
+        }
 ?>
