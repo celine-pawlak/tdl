@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,13 +7,12 @@
     <!--<link rel="icon" type="image/png" href="#" />  LOGO A AJOUTER  -->
 
     <!--Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
 
-    <!-- Materialize icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Font Awesome icons -->
+    <script src="https://kit.fontawesome.com/68f3afb94b.js" crossorigin="anonymous"></script>
 
-    <!-- Materialize and CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- CSS -->
     <link rel="stylesheet" href="ressources/style.css">
 
     <!-- Js & Jquery -->
@@ -23,14 +21,13 @@
     <script src="ressources/script.js"></script>
 </head>
 <body>
-<header>
-    <div class="max-width-900px mx-auto">
-        <p id="header_bonjour"></p>
+<header class="height-50px box-shadow">
+    <div id="header" class="max-width-900px mx-auto flex flex-row align-center justify-center h-100 relative">
+        <h1 class="" id="header_titre"></h1>
     </div>
 </header>
 <main id="main-to_do_list">
-    <article id="contenu-to_do_list" class="max-width-900px mx-auto border-black">
-        CONTENU
+    <article id="contenu-to_do_list" class="max-width-900px mx-auto border-black flex flex-row">
     </article>
 </main>
 <footer>
