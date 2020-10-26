@@ -10,7 +10,7 @@
     <aside id="info_password" class="info_none">
         Le mot de passe doit contenir au moins :
         <ul>
-            <li>8 caractères</li>
+            <li>8 caractères, dont :</li>
             <li>1 Majuscule</li>
             <li>1 minuscule</li>
             <li>1 chiffre</li>
