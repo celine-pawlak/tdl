@@ -2,20 +2,44 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function isComplete(task) {
-    if (task == 1) {
+function isComplete(taskState) {
+    if (taskState == 1) {
         return 'checked';
     }
-    if (task == 0) {
+    if (taskState == 0) {
         return ''
     }
 }
 
-// TDL
+function emptyTaskDelete(input) {
+    let idTask = $(input).parent().parent().attr('id');
+    let taskNameValue = $(input).val();
+    if (taskNameValue == '') {
+        $.ajax({
+            url: 'API/todolistAPI.php?param=deleteTask',
+            method: "POST",
+            data: {id: idTask},
+            dataType: "json",
+            success: (data) => {
+                $('#' + data).remove();
+            }
+        });
+    }
+}
+
+function updateTaskName() {
+    let idTask = $(this).parent().parent().attr('id');
+    var nameTask = $(this).val();
+    $.ajax({
+        url: 'API/todolistAPI.php?param=updateTask',
+        method: "POST",
+        data: {id: idTask, name: nameTask},
+    })
+}
+
 
 $(function () {
     home();
-
 })
 
 /*affichage html TDL*/
@@ -40,17 +64,16 @@ $(function () {
 function loadTask(id, name, date, complete) {
     let taskDate = new Date(date);
     let month = taskDate.getMonth() + 1;
-    $('#add_task').before("<li  id='" + id + "' class='flex flex-row my-1 align-center justify-around'>" +
-        "<i class=\"fas fa-arrows-alt-v grab_arrows box-shadow grey-color grabable\"></i>" +
+    let taskHtml = "<li  id='" + id + "' class='flex flex-row my-1 align-center justify-around'>" +
         "<label class='flex-grow-1' for=\"newtask-check\">" +
-        "   <input class='input_task ml-1 w-90' id='" + id + "' value='" + name + "'>" +
+        "   <input class='input_task ml-1 w-90' value='" + name + "'>" +
         "</label>" +
         "<p>" + taskDate.getDate() + '/' + month + '/' + taskDate.getFullYear() + "</p>" +
         "<input id='newtask-check' class='checkbox_complete' name='newtask-check' type='checkbox' " + isComplete(complete) + ">" +
         "<button class='background-white border-black deleteTask' ><i class=\"fas fa-trash-alt\"></i></button>" +
-        "</li>");
+        "</li>"
+    $('#add_task').before(taskHtml);
 }
-
 
 function seeList(id) {
     let listId = id;
@@ -84,20 +107,11 @@ function seeList(id) {
                     dataType: "json",
                     success: (data) => {
                         $('#header_titre').html("<input id=\"list" + data.listFromTask.idList + "\" name='title_list' class='no-border text-center font-big title_list' placeholder='" + data.listFromTask.name + "'>");
-                        for (let i = 0; i < data.tasks.length; i++) {
+                        for (let i = 0; i < data.tasks.length && i < 4; i++) {
                             loadTask(data.tasks[i].idTask, data.tasks[i].taskName, data.tasks[i].taskDate, data.tasks[i].taskComplete);
                         }
                         //si keyup sur task --> update
-                        $('.input_task').keyup(function () {
-                            let idTask = $(this).parent().parent().attr('id');
-                            var nameTask = $(this).val();
-                            $.ajax({
-                                url: 'API/todolistAPI.php?param=updateTask',
-                                method: "POST",
-                                data: {id: idTask, name: nameTask},
-                            })
-
-                        })
+                        $('.input_task').keyup(updateTaskName);
                         //si trash click --> suppress
                         $('.deleteTask').click(function () {
                             let idTask = $(this).parent().attr('id');
@@ -152,43 +166,14 @@ function seeList(id) {
                                                 }
                                             })
                                         })
-                                        $('.input_task').blur(function () {
-                                            let idTask = $(this).parent().parent().attr('id');
-                                            let taskNameValue = $(this).val();
-                                            if (taskNameValue == '') {
-                                                console.log(taskNameValue);
-                                                $.ajax({
-                                                    url: 'API/todolistAPI.php?param=deleteTask',
-                                                    method: "POST",
-                                                    data: {id: idTask},
-                                                    dataType: "json",
-                                                    success: (data) => {
-                                                        $('#' + data).remove();
-                                                    }
-                                                });
-                                            }
-                                        });
                                     }
                                 });
                         });
                         //si checkbox --> update*
                         //si checkbox 1 --> name barré
                         //si unfocus sur task et vide --> supprimer
-                        $('.input_task').blur(function () {
-                            let idTask = $(this).parent().parent().attr('id');
-                            let taskNameValue = $(this).val();
-                            if (taskNameValue == '') {
-                                console.log(taskNameValue);
-                                $.ajax({
-                                    url: 'API/todolistAPI.php?param=deleteTask',
-                                    method: "POST",
-                                    data: {id: idTask},
-                                    dataType: "json",
-                                    success: (data) => {
-                                        $('#' + data).remove();
-                                    }
-                                });
-                            }
+                        $("#tasks_list").on("blur", ".input_task", function (event) {
+                            emptyTaskDelete(event.currentTarget);
                         });
                         $('#see_users').click(function () {
                             let htmlUsers = "<section class='absolute w-200px'>" +
@@ -262,7 +247,7 @@ function home() {
                 let date = new Date(data.lists[i].date);
                 let month = date.getMonth() + 1;
                 let tasks = '';
-                for (let j = 0; j < data.tasks.length; j++) {
+                for (let j = 0; j < data.tasks.length ; j++) {
                     if (data.tasks[j].list_idList == data.lists[i].idList) {
                         if (data.tasks[j].name) {
                             tasks += "<li class=\"my-05\">\n" +
@@ -280,15 +265,13 @@ function home() {
                     "                    <h2>" + data.lists[i].name + "</h2>\n" +
                     "                    <p>" + date.getDate() + '/' + month + '/' + date.getFullYear() + "</p>\n" +
                     "                </div>\n" +
-                    "                <ul class=\"flex flex-column h-100\">\n" +
+                    "                <ul class=\"flex flex-column h-100 overflow-scroll-y tasks-list-home\">\n" +
                     tasks +
                     "                </ul>\n" +
                     "            </article>\n" +
                     "        </section>");
             }
-            $('#add_list').click(function () {
-                addList();
-            });
+            $('#add_list').click(addList);
 
             $('.list-user').click(function () {
                 seeList(this.id);
