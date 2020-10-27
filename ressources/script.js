@@ -15,7 +15,7 @@ function isComplete(task) {
 
 $(function () {
     home();
-
+   
 })
 
 /*affichage html TDL*/
@@ -112,8 +112,36 @@ function seeList(id) {
                                 success: (data) => {
                                     $('#' + data).remove();
                                 }
-                            })
+                            })                           
                         })
+                        $('#new_task').click(function()
+                            {
+                                let task_value = $('#add_task').val();                                       
+                                $.ajax(
+                                    {
+                                        url : 'API/todolistAPI.php?param=addtask',
+                                        type : 'POST',
+                                        data : {name : task_value, id : listId},
+                                        dataType : 'json',
+                                        success : (data) =>
+                                            {                                                            
+                                                loadTask(data.idTask, data.name, data.date, data.complete);
+                                                $('#add_task').val('');
+                                                $('.deleteTask').click(function () {
+                                                    let idTask = $(this).parent().attr('id');
+                                                    $.ajax({
+                                                        url: 'API/todolistAPI.php?param=deleteTask',
+                                                        method: "POST",
+                                                        data: {id: idTask},
+                                                        dataType: "json",
+                                                        success: (data) => {
+                                                            $('#' + data).remove();
+                                                        }
+                                                    })                           
+                                                })
+                                            }
+                                    });
+                            });
                         //si checkbox --> update*
                         //si checkbox 1 --> name barré
                         //si unfocus sur task et vide --> supprimer
@@ -182,15 +210,17 @@ function home() {
             for (let i = 0; i < data.lists.length; i++) {
                 let date = new Date(data.lists[i].date);
                 let month = date.getMonth() + 1;
-                let tasks = '';
+                let tasks = '';                
                 for (let j = 0; j < data.tasks.length; j++) {
-                    if (data.tasks[j].name) {
-                        tasks += "<li class=\"my-05\">\n" +
-                            "    <div class=\"flex flex-row justify-between\" >\n" +
-                            "        <label for=" + "task" + data.tasks[j].idTask + ">" + data.tasks[j].name + "</label>\n" +
-                            "        <input type=\"checkbox\" id=" + "task" + data.tasks[j].idTask + " name=" + "task" + data.tasks[j].idTask + " " + isComplete(data.tasks[j].complete) + " disabled >\n" +
-                            "    </div>\n" +
-                            "</li>";
+                    if (data.tasks[j].list_idList == data.lists[i].idList) {
+                        if (data.tasks[j].name) {
+                            tasks += "<li class=\"my-05\">\n" +
+                                "    <div class=\"flex flex-row justify-between\" >\n" +
+                                "        <label for=" + "task" + data.tasks[j].idTask + ">" + data.tasks[j].name + "</label>\n" +
+                                "        <input type=\"checkbox\" id=" + "task" + data.tasks[j].idTask + " name=" + "task" + data.tasks[j].idTask + " " + isComplete(data.tasks[j].complete) + " disabled >\n" +
+                                "    </div>\n" +
+                                "</li>";
+                        }
                     }
                 }
                 $('#add_list').after("<section id=\"" + data.lists[i].idList + "\" class=\"list-container box-shadow clickable flex flex-column m-1 list-user\">\n" +
