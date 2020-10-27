@@ -42,7 +42,10 @@ if (isset($_GET['param']) and $_GET['param'] == 'NewList') {
     $id_user = $_SESSION['id'];
     $req1 = $pdo->prepare("INSERT INTO list (name, user_idUserAdmin) VALUES (?,?)");
     $req1->execute([$nom_liste, $id_user]);
-    echo $pdo->lastInsertId();
+    $id_list = $pdo->lastInsertId();
+    $req2 = $pdo->prepare("INSERT INTO user_list (user_idUser, list_idList) VALUES (?,?)");
+    $req2->execute([$id_user, $id_list]);
+    echo json_encode($id_list);
 }
 if (isset($_GET['param']) and $_GET['param'] == 'GetList') {
     $id_list = $_POST['id'];
@@ -67,4 +70,10 @@ if (isset($_GET['param']) and $_GET['param'] == 'deleteTask') {
     $req5 = $pdo->prepare("DELETE FROM task WHERE idTask = ?");
     $req5->execute([$id_task]);
     echo json_encode($id_task);
+}
+if (isset($_GET['param']) and $_GET['param'] == 'updateStatusTask') {
+    $id_task = $_POST['id'];
+    $status_task = $_POST['status'];
+    $req6 = $pdo->prepare("UPDATE task SET complete=? WHERE idTask=?");
+    $req6->execute([$status_task, $id_task]);
 }
