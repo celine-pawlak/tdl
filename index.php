@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="ressources/style.css">
     <title>To Do List</title>
 </head>
-<body>
-    <header>
+<body id="body_index">
+    <header id="header_index">
         <?php include 'Views/header.php';
             // if(isset($_SESSION['user']))
             //     {
@@ -21,8 +21,13 @@
     </header>
     <main id="main_index">
         <h1>Bienvenu sur To Do List</h1>
-        <button id="inscription">Inscription</button>
-        <button id="connexion">Connexion</button>
+        <section>
+            <button id="inscription">Inscription</button>
+            <button id="connexion">Connexion</button>
+        </section>
     </main>
+    <footer>
+        <?php include 'Views/footer.php' ?>
+    </footer>
 </body>
 </html>
