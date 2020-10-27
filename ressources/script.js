@@ -152,6 +152,22 @@ function seeList(id) {
                                                 }
                                             })
                                         })
+                                        $('.input_task').blur(function () {
+                                            let idTask = $(this).parent().parent().attr('id');
+                                            let taskNameValue = $(this).val();
+                                            if (taskNameValue == '') {
+                                                console.log(taskNameValue);
+                                                $.ajax({
+                                                    url: 'API/todolistAPI.php?param=deleteTask',
+                                                    method: "POST",
+                                                    data: {id: idTask},
+                                                    dataType: "json",
+                                                    success: (data) => {
+                                                        $('#' + data).remove();
+                                                    }
+                                                });
+                                            }
+                                        });
                                     }
                                 });
                         });
@@ -162,6 +178,7 @@ function seeList(id) {
                             let idTask = $(this).parent().parent().attr('id');
                             let taskNameValue = $(this).val();
                             if (taskNameValue == '') {
+                                console.log(taskNameValue);
                                 $.ajax({
                                     url: 'API/todolistAPI.php?param=deleteTask',
                                     method: "POST",
