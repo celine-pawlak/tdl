@@ -1,7 +1,7 @@
 /* CELINE */
 /* GENERAL */
 
-body, div, h1, h2, h3, h4, h5, h6, p, ul {
+body, div, h1, h2, h3, h4, h5, h6, p, ul, ol {
     margin: 0;
     padding: 0;
     font-weight: normal;
@@ -21,6 +21,17 @@ li {
 }
 
 /* CUSTOM */
+.inline {
+    display: inline;
+}
+
+.z-index-4 {
+    z-index: 4;
+}
+
+.z-index-3 {
+    z-index: 3;
+}
 
 .max-width-900px {
     max-width: 900px;
@@ -40,6 +51,11 @@ li {
     margin-bottom: auto;
 }
 
+.mx-1 {
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
 .m-1 {
     margin: 1rem;
 }
@@ -47,6 +63,11 @@ li {
 .my-05 {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+}
+
+.my-1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .mr-1 {
@@ -73,6 +94,16 @@ li {
     height: 100%;
 }
 
+.w-100 {
+    width: 100%;
+}
+.w-90 {
+    width: 90%;
+}
+.w-80 {
+    width: 80%;
+}
+
 .height-50px {
     height: 50px;
 }
@@ -87,6 +118,10 @@ li {
 
 .flex-column {
     flex-direction: column;
+}
+
+.flex-grow-1 {
+    flex: 1;
 }
 
 .align-center {
@@ -129,7 +164,44 @@ li {
     cursor: pointer;
 }
 
+.grabable {
+    cursor: grab;
+}
+
+.no-border {
+    border: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
 /* SPECIFIC */
+.background-white {
+    background-color: white;
+}
+
+#pop-up-background {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.font-big {
+    font-size: 30px;
+}
+
+.grab_arrows {
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
 
 #header_bonjour {
     font-size: 30px;
@@ -162,6 +234,18 @@ li {
 
 .icon {
     font-size: 30px;
+}
+
+.input_task {
+    border-radius: 20px;
+    border: 1px solid #707070;
+    height: 40px;
+    padding: 0.5rem;
+    background-color: inherit;
+}
+
+.input_task > i {
+    font-size: 20px;
 }
 
 /* MARTIN */

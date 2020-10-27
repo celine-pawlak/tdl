@@ -20,10 +20,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="ressources/script.js"></script>
 </head>
-<body>
+<body class="relative">
 <header class="height-50px box-shadow">
     <div id="header" class="max-width-900px mx-auto flex flex-row align-center justify-center h-100 relative">
-        <h1 class="" id="header_titre"></h1>
+        <h1 class="flex" id="header_titre"></h1>
     </div>
 </header>
 <main id="main-to_do_list">

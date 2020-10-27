@@ -4,6 +4,7 @@ require '../Database/Database.php';
 $db = new Database('tdl');
 $pdo = $db->getPDO();
 /*var_dump($pdo->query("SELECT * FROM list LEFT JOIN user_list ON idList = list_idList WHERE user_idUser = 1")->fetchAll());*/
+$_SESSION['id'] = 1;
 
 // CHANGER ID PLUS TARD QUAND $_SESSION SERA FAIT
 
@@ -36,6 +37,34 @@ if (isset($_GET['param']) and $_GET['param'] == 'home') {
     $data['tasks'] = $tasks;
     echo json_encode($data);
 }
-if (isset($_GET['param']) and $_GET['param'] == 'addList') {
-
+if (isset($_GET['param']) and $_GET['param'] == 'NewList') {
+    $nom_liste = $_POST['listName'];
+    $id_user = $_SESSION['id'];
+    $req1 = $pdo->prepare("INSERT INTO list (name, user_idUserAdmin) VALUES (?,?)");
+    $req1->execute([$nom_liste, $id_user]);
+    echo $pdo->lastInsertId();
+}
+if (isset($_GET['param']) and $_GET['param'] == 'GetList') {
+    $id_list = $_POST['id'];
+    $id_user = $_SESSION['id'];
+    $req1 = $pdo->prepare(
+        "SELECT task.idTask, task.name as taskName, task.date as taskDate, task.complete as taskComplete, list.name as listName, list.date as listDate, list.user_idUserAdmin as idList
+        FROM task
+        LEFT JOIN list ON task.list_idList = list.idList
+        WHERE task.list_idList = ?"
+    );
+    $req1->execute([$id_list]);
+    echo json_encode($req1->fetchAll());
+}
+if (isset($_GET['param']) and $_GET['param'] == 'updateTask') {
+    $id_task = $_POST['id'];
+    $name_update = $_POST['name'];
+    $req7 = $pdo->prepare("UPDATE task SET name=? WHERE idTask=?");
+    $req7->execute([$name_update, $id_task]);
+}
+if (isset($_GET['param']) and $_GET['param'] == 'deleteTask') {
+    $id_task = $_POST['id'];
+    $req5 = $pdo->prepare("DELETE FROM task WHERE idTask = ?");
+    $req5->execute([$id_task]);
+    echo json_encode($id_task);
 }
