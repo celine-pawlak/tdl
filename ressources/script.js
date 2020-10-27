@@ -129,6 +129,33 @@ function seeList(id) {
                                 }
                             })
                         })
+                        $('#new_task').click(function () {
+                            let task_value = $('#add_task').val();
+                            $.ajax(
+                                {
+                                    url: 'API/todolistAPI.php?param=addtask',
+                                    type: 'POST',
+                                    data: {name: task_value, id: listId},
+                                    dataType: 'json',
+                                    success: (data) => {
+                                        loadTask(data.idTask, data.name, data.date, data.complete);
+                                        $('#add_task').val('');
+                                        $('.deleteTask').click(function () {
+                                            let idTask = $(this).parent().attr('id');
+                                            $.ajax({
+                                                url: 'API/todolistAPI.php?param=deleteTask',
+                                                method: "POST",
+                                                data: {id: idTask},
+                                                dataType: "json",
+                                                success: (data) => {
+                                                    $('#' + data).remove();
+                                                }
+                                            })
+                                        })
+                                    }
+                                });
+                        });
+                        //si checkbox --> update*
                         //si checkbox 1 --> name barré
                         //si unfocus sur task et vide --> supprimer
                         $('.input_task').blur(function () {

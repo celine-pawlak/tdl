@@ -1,6 +1,8 @@
 <ol class="flex flex-column w-100">
     <li id="tasks_list">
-        <button id="add_task" class="input_task flex flex-row justify-between"><i class="far fa-plus-square"></i>Ajouter une tâche ...
-        </button>
+        <input type="text" id="add_task">
+        <button id="new_task">Ajouter</button>
     </li>
 </ol>
+<!-- <script >var url = "ressources/seelist.js";
+$.getScript(url)</script>  -->
