@@ -83,9 +83,9 @@ function seeList(id) {
                     data: {id: id},
                     dataType: "json",
                     success: (data) => {
-                        $('#header_titre').html("<input id=\"list" + data[0].idList + "\" name='title_list' class='no-border text-center font-big title_list' placeholder='" + data[0].listName + "'>");
-                        for (let i = 0; i < data.length; i++) {
-                            loadTask(data[i].idTask, data[i].taskName, data[i].taskDate, data[i].taskComplete);
+                        $('#header_titre').html("<input id=\"list" + data.listFromTask.idList + "\" name='title_list' class='no-border text-center font-big title_list' placeholder='" + data.listFromTask.name + "'>");
+                        for (let i = 0; i < data.tasks.length; i++) {
+                            loadTask(data.tasks[i].idTask, data.tasks[i].taskName, data.tasks[i].taskDate, data.tasks[i].taskComplete);
                         }
                         //si keyup sur task --> update
                         $('.input_task').keyup(function () {
@@ -110,7 +110,7 @@ function seeList(id) {
                                     $('#' + data).remove();
                                 }
                             })
-                        })
+                        });
                         //si checkbox --> update
                         $('.checkbox_complete').click(function () {
                             let idTask = $(this).parent().attr('id');
@@ -128,7 +128,7 @@ function seeList(id) {
 
                                 }
                             })
-                        })
+                        });
                         $('#new_task').click(function () {
                             let task_value = $('#add_task').val();
                             $.ajax(
