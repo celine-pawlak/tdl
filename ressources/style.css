@@ -1,10 +1,18 @@
 /* CELINE */
 /* GENERAL */
 
+html {
+    min-height: 100vh;
+}
+
 body, div, h1, h2, h3, h4, h5, h6, p, ul, ol {
     margin: 0;
     padding: 0;
     font-weight: normal;
+}
+
+main {
+    min-height: 90vh;
 }
 
 * {
@@ -97,9 +105,11 @@ li {
 .w-100 {
     width: 100%;
 }
+
 .w-90 {
     width: 90%;
 }
+
 .w-80 {
     width: 80%;
 }
@@ -261,10 +271,28 @@ li {
 }
 
 /* FIN HEADER */
+/* FOOTER */
+footer {
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* FIN FOOTER */
 /* INSCRIPTION */
+#body_index {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
+    /* justify-content: space-around; */
+}
+
 #main_index {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -284,8 +312,9 @@ li {
     color: blue;
 }
 
-h1 {
-    color: green;
+#container_form {
+    display: flex;
+    flex-direction: row;
 }
 
 .nop {
@@ -335,7 +364,11 @@ h1 {
 }
 
 #main_index aside {
-    width: 40vw;
+    /* display: flex; */
+    flex-direction: column;
+    position: absolute;
+    left: 2vw;
+    width: 25vw;
     height: fit-content;
     align-items: center;
     margin-top: 2vh;
