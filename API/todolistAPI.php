@@ -28,8 +28,7 @@ if (isset($_GET['param']) and $_GET['param'] == 'home') {
     LEFT JOIN list on task.list_idList = list.idList
     LEFT JOIN user_list on list.idList = user_list.list_idList
     LEFT JOIN user on user_list.user_idUser = user.idUser
-    WHERE user.idUser = 1
-    LIMIT 4"
+    WHERE user.idUser = 1"
     )->fetchAll();
     $data = array();
     $data['user'] = $user;
