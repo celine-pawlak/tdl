@@ -1,4 +1,4 @@
-<h2>Créer un compte</h2>
+<h2>Créez votre compte</h2>
 <p id="info_inscription" class="info_none"></p>   
 
 <aside id="info_password" class="info_none">
@@ -18,8 +18,8 @@
     <input type="password" id="conf_password" name="conf_password" placeholder="Confirmer le mot de passe">    
     <input type="text" id="username" name="username" placeholder="Username">
     <p id="erreur_insc"></p>    
-    <button id="valid_insc">Inscription</button> 
-    <small>Vous avez déjà un compte ? => <span id="con_insc">Connectez-vous</span></small>    
+    <button class="clickable button m-1" id="valid_insc">Inscription</button>
+    <small>Vous avez déjà un compte ? <i class="fas fa-arrow-right"></i> <span class="clickable green-color" id="con_insc">Connectez-vous</span></small>
 </section>
 
 

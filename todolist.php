@@ -21,17 +21,18 @@
     <script src="ressources/script.js"></script>       
 </head>
 <body class="relative">
-<header class="height-50px box-shadow">
+<header class="height-5vh box-shadow">
     <div id="header" class="max-width-900px mx-auto flex flex-row align-center justify-center h-100 relative">
         <h1 class="flex" id="header_titre"></h1>
     </div>   
 </header>
 <main id="main-to_do_list">
-    <article id="contenu-to_do_list" class="max-width-900px mx-auto border-black flex flex-row">
+    <article id="contenu-to_do_list" class="max-width-900px mx-auto flex flex-row box-shadow h-min90vh background-white-ghost">
     </article>
 </main>
-<footer>
-    <div class="max-width-900px mx-auto">footer</div>
+<footer class="box-shadow flex flex-row align-center">
+    <?php
+    include 'Views/footer.php' ?>
 </footer>
 </body>
 </html>

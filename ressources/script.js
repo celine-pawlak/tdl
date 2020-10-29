@@ -11,6 +11,27 @@ function isComplete(taskState) {
     }
 }
 
+function taskChecked() {
+    let idTask = $(this).parent().attr('id');
+    if ($(this).prop('checked')) {
+        var complete = 1;
+        $('#input' + idTask).addClass('green-color done');
+    } else {
+        var complete = 0;
+        $('#input' + idTask).removeClass('green-color done');
+    }
+    $.ajax({
+        url: 'API/todolistAPI.php?param=updateStatusTask',
+        method: "POST",
+        data: {id: idTask, status: complete},
+        dataType: "json",
+        success: (data) => {
+
+        }
+    })
+
+}
+
 function emptyTaskDelete(input) {
     let idTask = $(input).parent().parent().attr('id');
     let taskNameValue = $(input).val();
@@ -37,42 +58,41 @@ function updateTaskName() {
     })
 }
 
+function updateListName() {
+    let idList = $(this).attr('id').substring(4);
+    var nameList = $(this).val();
+    $.ajax({
+        url: 'API/todolistAPI.php?param=updateList',
+        method: "POST",
+        data: {id: idList, name: nameList},
+    })
+}
+
+function isDone(taskState) {
+    if (taskState == 1) {
+        return 'green-color done';
+    }
+    if (taskState == 0) {
+        return '';
+    }
+}
 
 $(function () {
     home();
 })
 
-/*affichage html TDL*/
-
-
-/*récupération des données + affichage*/
-
-// ADD LISTE
-
-/*button ajouter liste*/
-/*requete de creation*/
-/*récupération de l'id de créatoin*/
-
-// AFFICHAGE LISTE
-
-/*récupération des données*/
-/*Affichage des données*/
-/*Edition des tâche en temps réel*/
-
-/*Ajout d'un input 'add_task*/
-
 function loadTask(id, name, date, complete) {
     let taskDate = new Date(date);
     let month = taskDate.getMonth() + 1;
-    let taskHtml = "<li  id='" + id + "' class='flex flex-row my-1 align-center justify-around'>" +
+    let taskHtml = "<li  id='" + id + "' class='flex flex-row my-05 align-center justify-around'>" +
         "<label class='flex-grow-1' for=\"newtask-check\">" +
-        "   <input class='input_task ml-1 w-90' value='" + name + "'>" +
+        "   <input id='input" + id + "' class='input_task ml-1 w-90 " + isDone(complete) + "' value='" + name + "'>" +
         "</label>" +
         "<p>" + taskDate.getDate() + '/' + month + '/' + taskDate.getFullYear() + "</p>" +
         "<input id='newtask-check' class='checkbox_complete' name='newtask-check' type='checkbox' " + isComplete(complete) + ">" +
-        "<button class='background-white border-black deleteTask' ><i class=\"fas fa-trash-alt\"></i></button>" +
+        "<button class='background-white deleteTask' ><i class=\"fas fa-trash-alt\"></i></button>" +
         "</li>"
-    $('#add_task').before(taskHtml);
+    $('#li-add_task').before(taskHtml);
 }
 
 function seeList(id) {
@@ -86,11 +106,11 @@ function seeList(id) {
                 $("#disconnect_button").remove();
                 $('#contenu-to_do_list').html(data);
                 $('#header').append(
-                    "<button id=\"home_button\" class=\"absolute absolute-left ml-1 my-auto border-black clickable\"><i\n" +
+                    "<button id=\"home_button\" class=\"absolute absolute-left ml-1 my-auto clickable background-white button\"><i\n" +
                     "                    class=\"fas fa-arrow-circle-left icon\"></i></button>"
                 )
                 $('#header').append(
-                    "<button id=\"see_users\" class=\"absolute absolute-right mr-1 my-auto border-black clickable\">" +
+                    "<button id=\"see_users\" class=\"absolute absolute-right mr-1 my-auto border-black clickable button\">" +
                     "<i class=\"fas fa-ellipsis-v\"></i></button>"
                 )
 
@@ -106,10 +126,13 @@ function seeList(id) {
                     data: {id: id},
                     dataType: "json",
                     success: (data) => {
-                        $('#header_titre').html("<input id=\"list" + data.listFromTask.idList + "\" name='title_list' class='no-border text-center font-big title_list' placeholder='" + data.listFromTask.name + "'>");
+                        $('#header_titre').html("<input id=\"list" + data.listFromTask.idList + "\" name='title_list' class='no-border text-center font-big title_list' value='" + data.listFromTask.name + "'>");
                         for (let i = 0; i < data.tasks.length && i < 4; i++) {
                             loadTask(data.tasks[i].idTask, data.tasks[i].taskName, data.tasks[i].taskDate, data.tasks[i].taskComplete);
                         }
+                        //si keyup sur titre
+                        $('.title_list').keyup(updateListName);
+
                         //si keyup sur task --> update
                         $('.input_task').keyup(updateTaskName);
                         //si trash click --> suppress
@@ -126,23 +149,7 @@ function seeList(id) {
                             })
                         });
                         //si checkbox --> update
-                        $('.checkbox_complete').click(function () {
-                            let idTask = $(this).parent().attr('id');
-                            if ($(this).prop('checked')) {
-                                var complete = 1;
-                            } else {
-                                var complete = 0;
-                            }
-                            $.ajax({
-                                url: 'API/todolistAPI.php?param=updateStatusTask',
-                                method: "POST",
-                                data: {id: idTask, status: complete},
-                                dataType: "json",
-                                success: (data) => {
-
-                                }
-                            })
-                        });
+                        $('.checkbox_complete').click(taskChecked);
                         $('#new_task').click(function () {
                             let task_value = $('#add_task').val();
                             $.ajax(
@@ -166,6 +173,7 @@ function seeList(id) {
                                                 }
                                             })
                                         })
+                                        $('.checkbox_complete').click(taskChecked);
                                     }
                                 });
                         });
@@ -191,7 +199,7 @@ function seeList(id) {
 function addList() {
     //appartition bouton création
     $(document.body).append("<section id='pop-up-background' class='z-index-3 absolute flex flex-column justify-center align-center'>" +
-        "<div id='pop-up-content' class='m-1 background-white p-05 box-shadow'>" +
+        "<div id='pop-up-content' class='m-1 background-white p-05'>" +
         "<i class=\"fas fa-edit my-auto grey-color\"></i>" +
         "<input class='mx-1' id='new_list_title' placeholder='Titre liste'>" +
         "<button class='background-white box-shadow border-black' id='new_list'>Créer</button>" +
@@ -242,30 +250,33 @@ function home() {
         method: "GET",
         dataType: "json",
         success: (data) => {
-            $('#header_titre').html('Bonjour, ' + capitalizeFirstLetter(data.user.username));
+            $('#header_titre').html('<p>Bonjour, <span class="green-color">' + capitalizeFirstLetter(data.user.username) + '</span></p>');
             for (let i = 0; i < data.lists.length; i++) {
                 let date = new Date(data.lists[i].date);
                 let month = date.getMonth() + 1;
-                let tasks = '';
-                for (let j = 0; j < data.tasks.length ; j++) {
+                let tasks = 'Votre liste est vide :\'\(';
+                for (let j = 0; j < data.tasks.length; j++) {
                     if (data.tasks[j].list_idList == data.lists[i].idList) {
                         if (data.tasks[j].name) {
+                            if (tasks == 'Votre liste est vide :\'\(') {
+                                tasks = '';
+                            }
                             tasks += "<li class=\"my-05\">\n" +
-                                "    <div class=\"flex flex-row justify-between\" >\n" +
-                                "        <label for=" + "task" + data.tasks[j].idTask + ">" + data.tasks[j].name + "</label>\n" +
-                                "        <input type=\"checkbox\" id=" + "task" + data.tasks[j].idTask + " name=" + "task" + data.tasks[j].idTask + " " + isComplete(data.tasks[j].complete) + " disabled >\n" +
+                                "    <div class=\"flex flex-row justify-between clickable relative\" >\n" +
+                                "        <label class='clickable' for=" + "task" + data.tasks[j].idTask + ">" + data.tasks[j].name + "</label>\n" +
+                                "        <input class='clickable mr-1' type=\"checkbox\" id=" + "task" + data.tasks[j].idTask + " name=" + "task" + data.tasks[j].idTask + " " + isComplete(data.tasks[j].complete) + " disabled >\n" +
                                 "    </div>\n" +
                                 "</li>";
                         }
                     }
                 }
-                $('#add_list').after("<section id=\"" + data.lists[i].idList + "\" class=\"list-container box-shadow clickable flex flex-column m-1 list-user\">\n" +
+                $('#add_list').after("<section id=\"" + data.lists[i].idList + "\" class=\"list-container clickable flex flex-column m-1 list-user\">\n" +
                     "            <article class=\"p-05 h-100 flex flex-column\">\n" +
                     "                <div class=\"flex flex-row justify-between\">\n" +
                     "                    <h2>" + data.lists[i].name + "</h2>\n" +
                     "                    <p>" + date.getDate() + '/' + month + '/' + date.getFullYear() + "</p>\n" +
                     "                </div>\n" +
-                    "                <ul class=\"flex flex-column h-100 overflow-scroll-y tasks-list-home\">\n" +
+                    "                <ul class=\"flex flex-column h-100 overflow-scroll-y tasks-list-home clickable\">\n" +
                     tasks +
                     "                </ul>\n" +
                     "            </article>\n" +
