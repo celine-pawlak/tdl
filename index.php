@@ -23,7 +23,7 @@
 </header>
 <main>
     <article id="main_index"
-             class="max-width-900px mx-auto background-white-ghost h-90vh flex flex-column justify-between align-center box-shadow">
+             class="max-width-900px mx-auto background-white-ghost h-90vh flex flex-column justify-around align-center box-shadow">
         <h1>Bienvenue sur To Do List !</h1>
         <p>Pour créer vos propres listes, veuillez vous connecter</p>
         <section>
