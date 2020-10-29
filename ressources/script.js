@@ -109,15 +109,10 @@ function seeList(id) {
                     "<button id=\"home_button\" class=\"absolute absolute-left ml-1 my-auto clickable background-white button\"><i\n" +
                     "                    class=\"fas fa-arrow-circle-left icon\"></i></button>"
                 )
-                $('#header').append(
-                    "<button id=\"see_users\" class=\"absolute absolute-right mr-1 my-auto border-black clickable button\">" +
-                    "<i class=\"fas fa-ellipsis-v\"></i></button>"
-                )
 
                 $('#home_button').click(function () {
                     home();
                     $("#home_button").remove();
-                    $("#see_users").remove();
                 })
                 //DONNEES
                 $.ajax({
@@ -127,7 +122,9 @@ function seeList(id) {
                     dataType: "json",
                     success: (data) => {
                         $('#header_titre').html("<input id=\"list" + data.listFromTask.idList + "\" name='title_list' class='no-border text-center font-big title_list' value='" + data.listFromTask.name + "'>");
+                        $('#li-add_task').before("<p id='emptyList' class='text-center'>Votre liste est vide <i class=\"far fa-frown-open\"></i> ! Ajoutez une tâche...</p>");
                         for (let i = 0; i < data.tasks.length && i < 4; i++) {
+                            $('#emptyList').remove();
                             loadTask(data.tasks[i].idTask, data.tasks[i].taskName, data.tasks[i].taskDate, data.tasks[i].taskComplete);
                         }
                         //si keyup sur titre
@@ -159,6 +156,7 @@ function seeList(id) {
                                     data: {name: task_value, id: listId},
                                     dataType: 'json',
                                     success: (data) => {
+                                        $('#emptyList').remove();
                                         loadTask(data.idTask, data.name, data.date, data.complete);
                                         $('#add_task').val('');
                                         $('.deleteTask').click(function () {
@@ -183,11 +181,7 @@ function seeList(id) {
                         $("#tasks_list").on("blur", ".input_task", function (event) {
                             emptyTaskDelete(event.currentTarget);
                         });
-                        $('#see_users').click(function () {
-                            let htmlUsers = "<section class='absolute w-200px'>" +
-                                "" +
-                                "</section>"
-                        })
+
                     }
                 })
             }
@@ -234,7 +228,7 @@ function addList() {
 
 function home() {
     //génere HTML
-    $("#header").append("<button id=\"disconnect_button\" class=\"absolute absolute-right mr-1 my-auto border-black clickable\"><i\n" +
+    $("#header").append("<button id=\"disconnect_button\" class=\"absolute absolute-right mr-1 my-auto border-black clickable button\"><i\n" +
         "class=\"fas fa-sign-out-alt icon\"></i></button>");
     $.ajax({
         url: 'views/todolistHome.php',
@@ -254,11 +248,11 @@ function home() {
             for (let i = 0; i < data.lists.length; i++) {
                 let date = new Date(data.lists[i].date);
                 let month = date.getMonth() + 1;
-                let tasks = 'Votre liste est vide :\'\(';
+                let tasks = '<p class="text-center">Votre liste est vide <i class="far fa-frown-open"></i></p>';
                 for (let j = 0; j < data.tasks.length; j++) {
                     if (data.tasks[j].list_idList == data.lists[i].idList) {
                         if (data.tasks[j].name) {
-                            if (tasks == 'Votre liste est vide :\'\(') {
+                            if (tasks == '<p class="text-center">Votre liste est vide <i class="far fa-frown-open"></i></p>') {
                                 tasks = '';
                             }
                             tasks += "<li class=\"my-05\">\n" +
