@@ -32,7 +32,8 @@ li {
 .green-color {
     color: #32ce70 !important;
 }
-.done{
+
+.done {
     text-decoration: line-through;
 }
 
@@ -282,6 +283,9 @@ main {
 .font-big {
     font-size: 30px;
 }
+.font-small {
+    font-size: 10px;
+}
 
 .grab_arrows {
     border-radius: 100%;
@@ -326,9 +330,11 @@ main {
     background-color: white;
     font-size: 15px;
 }
-button:focus{
+
+button:focus {
     outline: none;
 }
+
 .list-container {
     width: 250px;
     height: 250px;
@@ -386,21 +392,25 @@ input {
     color: #707070;
     border: none;
 }
-.deleteTask:hover{
+
+.deleteTask:hover {
     color: #dc5a5a;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
 }
-#li-add_task{
+
+#li-add_task {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-left: 1rem;
     justify-content: center;
 }
-#add_task{
-    width:50%;
+
+#add_task {
+    width: 50%;
 }
-label{
+
+label {
     word-break: break-word;
 }
 
@@ -548,4 +558,49 @@ input:focus {
 }
 
 /* FIN INSCRIPTION */
-input[type='checkbox'], input[type='radio'] { filter: grayscale(1) }
+input[type='checkbox'], input[type='radio'] {
+    filter: grayscale(1)
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+    .max-width-900px {
+        max-width: 600px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .max-width-900px {
+        max-width: 350px;
+    }
+
+    .list-container {
+        margin: 1rem auto !important;
+    }
+
+    #tasks_list > li {
+        flex-wrap:wrap;
+    }
+    .flex-grow-1-mw600{
+        width: 100%;
+    }
+    .ml-1-mw600{
+        margin-left: 1rem;
+    }
+    .title_list{
+        font-size: 15px;
+    }
+    .input_task{
+        font-size: 10px;
+    }
+    #header_titre{
+        font-size: 26px;
+    }
+    #main_index button{
+        width: 150px;
+    }
+    #main_index input{
+        width: 100%;
+    }
+}

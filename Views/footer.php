@@ -1,1 +1,1 @@
-<p class="max-width-900px mx-auto">To do list 2020 - Céline Pawlak & Martin Bozon</p>
+<p class="max-width-900px mx-auto text-center">To do list 2020 - Céline Pawlak & Martin Bozon</p>

@@ -85,10 +85,10 @@ function loadTask(id, name, date, complete) {
     let taskDate = new Date(date);
     let month = taskDate.getMonth() + 1;
     let taskHtml = "<li  id='" + id + "' class='flex flex-row my-05 align-center justify-around'>" +
+        "<p class='font-small mx-1 flex-grow-1-mw600'>" + taskDate.getDate() + '/' + month + '/' + taskDate.getFullYear() + "</p>" +
         "<label class='flex-grow-1' for=\"newtask-check\">" +
-        "   <input id='input" + id + "' class='input_task ml-1 w-90 " + isDone(complete) + "' value='" + name + "'>" +
+        "   <input id='input" + id + "' class='input_task w-90 ml-1-mw600 " + isDone(complete) + "' value='" + name + "'>" +
         "</label>" +
-        "<p>" + taskDate.getDate() + '/' + month + '/' + taskDate.getFullYear() + "</p>" +
         "<input id='newtask-check' class='checkbox_complete' name='newtask-check' type='checkbox' " + isComplete(complete) + ">" +
         "<button class='background-white deleteTask' ><i class=\"fas fa-trash-alt\"></i></button>" +
         "</li>"

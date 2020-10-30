@@ -25,11 +25,11 @@ if(isset($_SESSION['user']))
 <main>
     <article id="main_index"
              class="max-width-900px mx-auto background-white-ghost h-90vh flex flex-column justify-around align-center box-shadow">
-        <h1>Bienvenue sur To Do List !</h1>
-        <p>Pour créer vos propres listes, veuillez vous connecter</p>
+        <h1 class="text-center">Bienvenue sur To Do List !</h1>
+        <p class="mx-auto mx-1 text-center">Pour créer vos propres listes, veuillez vous connecter</p>
         <section>
-            <button class="clickable button m-1" id="inscription">Inscription</button>
-            <button class="clickable button m-1" id="connexion">Connexion</button>
+            <button class="clickable button" id="inscription">Inscription</button>
+            <button class="clickable button" id="connexion">Connexion</button>
         </section>
     </article>
 </main>
