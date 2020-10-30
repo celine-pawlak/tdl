@@ -12,6 +12,7 @@ $(function () {
                 }
             });
     });
+   
     $('#header_acc').click(function () {
         window.location.href = 'index.php';
     });

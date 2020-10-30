@@ -230,6 +230,19 @@ function home() {
     //génere HTML
     $("#header").append("<button id=\"disconnect_button\" class=\"absolute absolute-right mr-1 my-auto border-black clickable button\"><i\n" +
         "class=\"fas fa-sign-out-alt icon\"></i></button>");
+    $('#disconnect_button').click(function () {
+        $.ajax(
+            {
+                url: 'API/indexAPI.php',
+                type: 'POST',
+                data: {deconnexion: true, page: 'deconnexion'},
+                success: (data) => {
+                    if (data == 'deconnecter') {
+                        window.location.href = 'index.php';
+                    }
+                }
+            });
+    });
     $.ajax({
         url: 'views/todolistHome.php',
         method: "GET",
