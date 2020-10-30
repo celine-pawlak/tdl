@@ -1,3 +1,8 @@
+<?php session_start(); 
+if(isset($_SESSION['user']))
+{
+    header('Location:todolist.php ');
+}?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,11 +19,7 @@
 <body id="body_index">
 <header id="header_index" class="height-5vh box-shadow z-index-4">
     <?php
-    include 'Views/header.php';
-    // if(isset($_SESSION['user']))
-    //     {
-    //         header('Location:todolist.php ');
-    //     }
+    include 'Views/header.php';    
     ?>
 </header>
 <main>
