@@ -8,8 +8,7 @@ $(function()
         // Vérifie que le mail soit au format mail
         $('#email').keyup(function()
             {
-                regexMailValide(this, 'nop', 'yep');
-                
+                regexMailValide(this, 'nop', 'yep');                
             });            
         // Vérifie que le mail de confirmation == mail 
         $('#conf_email').keyup(function()
@@ -40,12 +39,11 @@ $(function()
                 if($('#email').hasClass('yep') && $('#conf_email').hasClass('yep') && $('#password').hasClass('yep') && $('#conf_password').hasClass('yep'))                             
                     {                       
                         // Envoie les informations pour traitement                                    
-                        if(($('#email').val() != "" || $('#email').val() != null) && ($('#password').val() != "" || $('#password').val() != null) && ($('#username').val() != "" || $('#username').val() != null) && ($('#conf_email').val() != "" || $('#conf_email').val() != null) && ($('#conf_password').val() != '' || $('#conf_password') != null))
+                        if(($('#email').val() != "" || $('#email').val() != null) && ($('#password').val() != "" || $('#password').val() != null) && ($('#conf_email').val() != "" || $('#conf_email').val() != null) && ($('#conf_password').val() != '' || $('#conf_password') != null))
                             {
                                 var email = $('#email').val();
                                 var conf_email = $('#conf_email').val();
-                                var password = $('#password').val();
-                                var username = $('#username').val();    
+                                var password = $('#password').val();                                   
                                 var conf_password = $('#conf_password').val();
         
                                 $.ajax(
@@ -63,12 +61,11 @@ $(function()
                                                     }
                                                 else
                                                     {
-                                                        var error = JSON.parse(data);
-                                                        console.log(error);
-                                                        for(let i = 0; i < error.length; i++)
+                                                        var error = JSON.parse(data);                                                        
+                                                        for(let i=0; i<error.length; i++)
                                                             {                                                        
                                                                 $('#erreur_insc').append(error[i]+'<br/>');
-                                                            }
+                                                            }                                                                                                                
                                                     }
                                             }
                                     });

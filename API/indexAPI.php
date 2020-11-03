@@ -20,7 +20,7 @@ if ($_POST['page'] == 'inscription') {
         $isUser = $req->fetchAll();
 
         // Vérifie que le mail soit au bon format et que les mails soient les mêmes
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $email != $conf_mail) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match('/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/', $email)) {
             array_push($errors, 'Le mail n\'est pas au bon format');
         }
         if ($email != $conf_mail) {
@@ -29,6 +29,10 @@ if ($_POST['page'] == 'inscription') {
         if (!empty($isUser)) {
             array_push($errors, 'Cet email est déjà lié à un compte');
         }
+        if(!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,30})$/', $password))
+            {
+                array_push($errors, "Le mail n'est pas suffisament sécurisé");
+            }
         if ($password != $conf_password) {
             array_push($errors, 'Les mots de passe sont différents');
         }
